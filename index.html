@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MALAK HACKS - GET KEY</title>
+    <style>
+        /* ستايل الماتريكس الاحترافي */
+        body { 
+            background-color: #000; 
+            color: #00ff41; 
+            font-family: 'Courier New', monospace; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            overflow: hidden;
+        }
+        .container {
+            background: rgba(0, 20, 0, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #00ff41;
+            box-shadow: 0 0 20px #00ff41;
+            text-align: center;
+            width: 320px;
+            z-index: 10;
+        }
+        h1 { font-size: 24px; letter-spacing: 2px; margin-bottom: 10px; }
+        p { font-size: 14px; color: #fff; }
+        
+        .btn {
+            background: #00ff41;
+            color: #000;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        .btn:hover { background: #00cc33; box-shadow: 0 0 10px #00cc33; }
+
+        #timer { margin-top: 15px; color: #ffcc00; display: none; font-weight: bold; }
+        
+        #keyBox {
+            margin-top: 20px;
+            padding: 15px;
+            background: #001100;
+            border: 1px dashed #00ff41;
+            display: none;
+            border-radius: 10px;
+        }
+        .key-text { color: #fff; font-size: 18px; margin: 10px 0; display: block; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>MALAK_HACKS</h1>
+    <p>للحصول على المفتاح: اشترك في القناة، اترك تعليقاً، ثم عد هنا.</p>
+    
+    <a href="https://youtube.com/@malaku_994?si=v631SvYYeZPpIBrZ" target="_blank" class="btn" id="subBtn" onclick="startProcess()">إضغط للاشتراك والتحقق</a>
+    
+    <div id="timer">جاري التحقق من النظام: <span id="count">10</span>s</div>
+    
+    <div id="keyBox">
+        <p style="color: #00ff41;">تم التحقق! مفتاحك هو:</p>
+        <span class="key-text" id="key">MALAK-V1-778X</span>
+        <button class="btn" style="background: #fff;" onclick="copyKey()">نسخ المفتاح</button>
+    </div>
+</div>
+
+<script>
+    function startProcess() {
+        document.getElementById('timer').style.display = "block";
+        document.getElementById('subBtn').style.pointerEvents = "none";
+        document.getElementById('subBtn').style.opacity = "0.5";
+        
+        let count = 10;
+        let countdown = setInterval(() => {
+            count--;
+            document.getElementById('count').innerText = count;
+            if (count <= 0) {
+                clearInterval(countdown);
+                document.getElementById('timer').style.display = "none";
+                document.getElementById('keyBox').style.display = "block";
+                document.getElementById('subBtn').style.display = "none";
+            }
+        }, 1000);
+    }
+
+    function copyKey() {
+        let keyText = document.getElementById('key').innerText;
+        navigator.clipboard.writeText(keyText);
+        alert("تم نسخ المفتاح! ضعه في MALAK_HACKS");
+    }
+</script>
+
+</body>
+</html>

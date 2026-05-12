@@ -3,72 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MALAK HACKS | SYSTEM</title>
+    <title>MALAK HACKS | KEY SYSTEM</title>
     <style>
         :root { --neon: #0f0; --bg: #050505; }
-        body { background: var(--bg); color: var(--neon); font-family: 'Consolas', monospace; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
-        .box { width: 90%; max-width: 450px; border: 1px solid var(--neon); border-radius: 15px; padding: 20px; text-align: center; background: rgba(0,20,0,0.8); box-shadow: 0 0 20px var(--neon); backdrop-filter: blur(10px); }
-        .task-btn { background: #111; border: 1px solid var(--neon); color: #0f0; padding: 12px; margin: 10px 0; border-radius: 8px; cursor: pointer; display: block; text-decoration: none; font-size: 14px; transition: 0.3s; }
-        .task-btn:hover { background: var(--neon); color: #000; }
-        
-        /* تصميم الزر المعطل */
-        .btn-main { width: 100%; padding: 15px; background: #222; color: #555; border: none; font-weight: bold; border-radius: 8px; cursor: not-allowed; margin-top: 10px; transition: 0.3s; }
-        .btn-active { background: var(--neon) !important; color: #000 !important; cursor: pointer !important; box-shadow: 0 0 15px var(--neon); }
-
-        #executor { display: none; width: 95%; max-width: 700px; height: 450px; text-align: left; }
+        body { background: var(--bg); color: var(--neon); font-family: 'Consolas', monospace; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center; }
+        .box { width: 90%; max-width: 400px; border: 1px solid var(--neon); border-radius: 15px; padding: 25px; background: rgba(0,20,0,0.9); box-shadow: 0 0 20px var(--neon); }
+        .btn-step { background: #111; border: 1px solid var(--neon); color: #0f0; padding: 15px; margin: 10px 0; border-radius: 8px; cursor: pointer; display: block; text-decoration: none; transition: 0.3s; font-weight: bold; position: relative; overflow: hidden; }
+        .btn-step.disabled { opacity: 0.3; cursor: not-allowed; border-color: #333; color: #555; pointer-events: none; }
+        .btn-get { background: var(--neon); color: #000; width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; display: none; margin-top: 15px; box-shadow: 0 0 15px var(--neon); }
+        #executor-screen { display: none; }
         textarea { width: 100%; height: 200px; background: #000; color: #fff; border: 1px solid #333; margin-top: 10px; padding: 10px; border-radius: 5px; outline: none; }
     </style>
 </head>
 <body>
 
-<div id="key-screen" class="box">
-    <h2 style="margin-top:0; color: #0f0;">MALAK HACKS - نظام المفتاح</h2>
-    <p style="font-size: 12px; color: #888;">أكمل المهام وانتظر 10 ثواني للحصول على المفتاح:</p>
-    
-    <a href="https://youtube.com/@malaku_994?si=8mOxRBCY67r9zsfq" target="_blank" class="task-btn">1. اشتراك بالقناة (إجباري)</a>
-    <a href="https://youtube.com/@malaku_994?si=8mOxRBCY67r9zsfq" target="_blank" class="task-btn">2. لايك لآخر فيديو</a>
-    <a href="https://youtube.com/@malaku_994?si=8mOxRBCY67r9zsfq" target="_blank" class="task-btn">3. تعليق على الفيديو</a>
+<div id="gate-screen" class="box">
+    <h2 id="title">MALAK HACKS SYSTEM</h2>
+    <p id="status" style="font-size: 13px; color: #888;">أكمل المهام بالترتيب (انتظر 10ث لكل مهمة)</p>
 
-    <input type="text" id="key-input" placeholder="ضع المفتاح هنا..." style="width:100%; padding:10px; background:#000; border:1px solid var(--neon); color:#fff; border-radius:5px; margin-top:10px; text-align:center;">
-    
-    <button id="check-btn" class="btn-main" disabled onclick="checkKey()">انتظر (10)...</button>
-    
-    <p style="font-size: 10px; color: #444; margin-top: 10px;">المفتاح: MALAK-994</p>
+    <div id="tasks-container">
+        <div id="btn1" class="btn-step" onclick="runTask(1, 'https://youtube.com/@malaku_994?si=8mOxRBCY67r9zsfq')">1️⃣ المهمة الأولى (اضغط هنا)</div>
+        
+        <div id="btn2" class="btn-step disabled" onclick="runTask(2, 'https://youtube.com/@malaku_994?si=8mOxRBCY67r9zsfq')">2️⃣ المهمة الثانية (مقفل)</div>
+        
+        <div id="btn3" class="btn-step disabled" onclick="runTask(3, 'https://youtube.com/@malaku_994?si=8mOxRBCY67r9zsfq')">3️⃣ المهمة الثالثة (مقفل)</div>
+    </div>
+
+    <button id="get-key-btn" class="btn-get" onclick="generateKey()">🎁 استلام المفتاح (GET KEY)</button>
+
+    <div id="verify-section" style="margin-top: 20px; display: none;">
+        <input type="text" id="key-input" placeholder="ضع المفتاح المستلم هنا..." style="width:100%; padding:12px; background:#000; border:1px solid var(--neon); color:#fff; text-align:center; border-radius:8px;">
+        <button class="btn-step" style="width:100%; background: var(--neon); color:#000;" onclick="finalAccess()">دخول للهاك</button>
+    </div>
 </div>
 
-<div id="executor" class="box">
-    <div style="border-bottom: 1px solid #0f0; padding-bottom: 10px; margin-bottom: 10px; display: flex; justify-content: space-between;">
-        <span>MALAK HACKS V1.0</span>
-        <span style="color: yellow;">EXECUTOR READY</span>
-    </div>
+<div id="executor-screen" class="box" style="max-width: 600px; text-align: left;">
+    <div style="border-bottom: 1px solid #0f0; padding-bottom: 10px; font-weight: bold;">MALAK EXECUTOR V4</div>
     <textarea placeholder="-- Paste Your Lua Script Here..."></textarea>
-    <button class="btn-main btn-active" onclick="alert('Script Injected!')">EXECUTE</button>
+    <button class="btn-step" style="width:100%; background: var(--neon); color:#000; margin-top:10px;" onclick="alert('Injected Successfully!')">EXECUTE</button>
 </div>
 
 <script>
-    let timeLeft = 10;
-    const btn = document.getElementById('check-btn');
+    const correctKey = "MALAK-994-BOSS"; // هذا المفتاح اللي لازم يحطه
 
-    // عداد تنازلي عند فتح الصفحة
-    const timer = setInterval(() => {
-        timeLeft--;
-        if (timeLeft > 0) {
-            btn.innerText = `انتظر (${timeLeft})...`;
-        } else {
-            clearInterval(timer);
-            btn.innerText = "فتح الهاك (CHECK)";
-            btn.disabled = false;
-            btn.classList.add('btn-active');
-        }
-    }, 1000);
+    function runTask(taskNum, url) {
+        window.open(url, '_blank');
+        const btn = document.getElementById(`btn${taskNum}`);
+        btn.onclick = null; // منع الضغط مرة ثانية
+        
+        let timer = 10;
+        const interval = setInterval(() => {
+            btn.innerText = `⏳ انتظر (${timer})...`;
+            timer--;
+            
+            if (timer < 0) {
+                clearInterval(interval);
+                btn.innerText = `✅ اكتملت المهمة ${taskNum}`;
+                btn.style.color = "#fff";
+                btn.style.borderColor = "#fff";
+                
+                // فتح المهمة التالية
+                const nextTask = document.getElementById(`btn${taskNum + 1}`);
+                if (nextTask) {
+                    nextTask.classList.remove('disabled');
+                    nextTask.innerText = `${taskNum + 1}️⃣ المهمة التالية (اضغط الآن)`;
+                } else {
+                    // إذا خلص كل المهام
+                    document.getElementById('get-key-btn').style.display = "block";
+                    document.getElementById('status').innerText = "ممتاز! استلم مفتاحك الآن";
+                }
+            }
+        }, 1000);
+    }
 
-    function checkKey() {
-        const input = document.getElementById('key-input').value;
-        if(input === "MALAK-994") {
-            document.getElementById('key-screen').style.display = 'none';
-            document.getElementById('executor').style.display = 'block';
+    function generateKey() {
+        alert("انسخ هذا المفتاح: " + correctKey);
+        document.getElementById('tasks-container').style.display = "none";
+        document.getElementById('get-key-btn').style.display = "none";
+        document.getElementById('verify-section').style.display = "block";
+        document.getElementById('title').innerText = "تفعيل الهاك";
+    }
+
+    function finalAccess() {
+        const userKey = document.getElementById('key-input').value;
+        if (userKey === correctKey) {
+            document.getElementById('gate-screen').style.display = "none";
+            document.getElementById('executor-screen').style.display = "block";
         } else {
-            alert("المفتاح خاطئ! تأكد من إكمال المهام.");
+            alert("المفتاح غلط! جرب مرة ثانية.");
         }
     }
 </script>

@@ -3,52 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MALAK HACKS | DELTA STYLE</title>
+    <title>MALAK HACKS | SYSTEM</title>
     <style>
         :root { --neon: #0f0; --bg: #050505; }
-        body { background: var(--bg); color: var(--neon); font-family: 'Consolas', monospace; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .box { width: 90%; max-width: 450px; border: 1px solid var(--neon); border-radius: 15px; padding: 20px; text-align: center; background: rgba(0,20,0,0.8); box-shadow: 0 0 20px var(--neon); }
-        .task-btn { background: #111; border: 1px solid var(--neon); color: #0f0; padding: 12px; margin: 10px 0; border-radius: 8px; cursor: pointer; display: block; text-decoration: none; font-size: 14px; }
+        body { background: var(--bg); color: var(--neon); font-family: 'Consolas', monospace; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        .box { width: 90%; max-width: 450px; border: 1px solid var(--neon); border-radius: 15px; padding: 20px; text-align: center; background: rgba(0,20,0,0.8); box-shadow: 0 0 20px var(--neon); backdrop-filter: blur(10px); }
+        .task-btn { background: #111; border: 1px solid var(--neon); color: #0f0; padding: 12px; margin: 10px 0; border-radius: 8px; cursor: pointer; display: block; text-decoration: none; font-size: 14px; transition: 0.3s; }
         .task-btn:hover { background: var(--neon); color: #000; }
+        
+        /* تصميم الزر المعطل */
+        .btn-main { width: 100%; padding: 15px; background: #222; color: #555; border: none; font-weight: bold; border-radius: 8px; cursor: not-allowed; margin-top: 10px; transition: 0.3s; }
+        .btn-active { background: var(--neon) !important; color: #000 !important; cursor: pointer !important; box-shadow: 0 0 15px var(--neon); }
+
         #executor { display: none; width: 95%; max-width: 700px; height: 450px; text-align: left; }
-        textarea { width: 100%; height: 200px; background: #000; color: #fff; border: 1px solid #333; margin-top: 10px; padding: 10px; border-radius: 5px; }
-        .btn-main { width: 100%; padding: 15px; background: var(--neon); color: #000; border: none; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+        textarea { width: 100%; height: 200px; background: #000; color: #fff; border: 1px solid #333; margin-top: 10px; padding: 10px; border-radius: 5px; outline: none; }
     </style>
 </head>
 <body>
 
 <div id="key-screen" class="box">
-    <h2 style="margin-top:0;">MALAK HACKS - نظام المفتاح</h2>
-    <p style="font-size: 12px; color: #888;">أكمل الشروط لفتح الهاك:</p>
+    <h2 style="margin-top:0; color: #0f0;">MALAK HACKS - نظام المفتاح</h2>
+    <p style="font-size: 12px; color: #888;">أكمل المهام وانتظر 10 ثواني للحصول على المفتاح:</p>
     
     <a href="https://youtube.com/@malaku_994?si=8mOxRBCY67r9zsfq" target="_blank" class="task-btn">1. اشتراك بالقناة (إجباري)</a>
     <a href="https://youtube.com/@malaku_994?si=8mOxRBCY67r9zsfq" target="_blank" class="task-btn">2. لايك لآخر فيديو</a>
     <a href="https://youtube.com/@malaku_994?si=8mOxRBCY67r9zsfq" target="_blank" class="task-btn">3. تعليق على الفيديو</a>
 
     <input type="text" id="key-input" placeholder="ضع المفتاح هنا..." style="width:100%; padding:10px; background:#000; border:1px solid var(--neon); color:#fff; border-radius:5px; margin-top:10px; text-align:center;">
-    <button class="btn-main" onclick="checkKey()">فتح الهاك (CHECK)</button>
-    <p style="font-size: 10px; color: #555; margin-top: 10px;">المفتاح الحالي للتجربة: MALAK-994</p>
+    
+    <button id="check-btn" class="btn-main" disabled onclick="checkKey()">انتظر (10)...</button>
+    
+    <p style="font-size: 10px; color: #444; margin-top: 10px;">المفتاح: MALAK-994</p>
 </div>
 
 <div id="executor" class="box">
     <div style="border-bottom: 1px solid #0f0; padding-bottom: 10px; margin-bottom: 10px; display: flex; justify-content: space-between;">
         <span>MALAK HACKS V1.0</span>
-        <span style="color: yellow;">CONNECTED</span>
+        <span style="color: yellow;">EXECUTOR READY</span>
     </div>
-    <input type="text" placeholder="Script Name..." style="background:#000; border:1px solid #333; color:#0f0; padding:5px; border-radius:3px; width:150px;">
-    <textarea placeholder="-- Paste Lua Script Here..."></textarea>
-    <button class="btn-main" onclick="alert('Script Executed!')">EXECUTE (تشغيل)</button>
-    <button onclick="location.reload()" style="background:none; border:none; color:red; cursor:pointer; margin-top:10px; width:100%; font-size:11px;">خروج (Logout)</button>
+    <textarea placeholder="-- Paste Your Lua Script Here..."></textarea>
+    <button class="btn-main btn-active" onclick="alert('Script Injected!')">EXECUTE</button>
 </div>
 
 <script>
+    let timeLeft = 10;
+    const btn = document.getElementById('check-btn');
+
+    // عداد تنازلي عند فتح الصفحة
+    const timer = setInterval(() => {
+        timeLeft--;
+        if (timeLeft > 0) {
+            btn.innerText = `انتظر (${timeLeft})...`;
+        } else {
+            clearInterval(timer);
+            btn.innerText = "فتح الهاك (CHECK)";
+            btn.disabled = false;
+            btn.classList.add('btn-active');
+        }
+    }, 1000);
+
     function checkKey() {
         const input = document.getElementById('key-input').value;
         if(input === "MALAK-994") {
             document.getElementById('key-screen').style.display = 'none';
             document.getElementById('executor').style.display = 'block';
         } else {
-            alert("المفتاح خاطئ! اشترك في القناة وجرب مرة ثانية.");
+            alert("المفتاح خاطئ! تأكد من إكمال المهام.");
         }
     }
 </script>

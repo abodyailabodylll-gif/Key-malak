@@ -3,92 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MALAK EXECUTOR | DELTA STYLE</title>
+    <title>MALAK HACKS | DELTA STYLE</title>
     <style>
-        body { background: #050505; color: #0f0; font-family: sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .executor-window { width: 95%; max-width: 700px; height: 450px; background: #111; border: 1px solid #0f0; border-radius: 10px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 0 20px #0f0; }
-        .top-bar { background: #000; padding: 10px; display: flex; justify-content: space-between; border-bottom: 1px solid #0f0; font-size: 12px; }
-        .main-content { display: flex; flex: 1; }
-        .side-tabs { width: 120px; background: #0a0a0a; border-right: 1px solid #222; padding: 10px; display: flex; flex-direction: column; gap: 5px; }
-        .tab-item { background: #1a1a1a; padding: 8px; font-size: 11px; border-radius: 4px; cursor: pointer; border: 1px solid transparent; overflow: hidden; text-overflow: ellipsis; }
-        .tab-item.active { border-color: #0f0; background: #053305; }
-        .editor-area { flex: 1; padding: 10px; display: flex; flex-direction: column; }
-        textarea { flex: 1; background: #000; color: #0f0; border: 1px solid #222; padding: 10px; font-family: monospace; resize: none; outline: none; border-radius: 5px; }
-        .bottom-btns { padding: 10px; display: flex; gap: 10px; background: #000; }
-        button { background: #0f0; color: #000; border: none; padding: 8px 15px; border-radius: 4px; font-weight: bold; cursor: pointer; }
-        button.secondary { background: #222; color: #0f0; border: 1px solid #0f0; }
-        input#scriptName { background: #000; border: 1px solid #333; color: #0f0; padding: 5px; font-size: 11px; margin-bottom: 5px; border-radius: 3px; }
+        :root { --neon: #0f0; --bg: #050505; }
+        body { background: var(--bg); color: var(--neon); font-family: 'Consolas', monospace; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .box { width: 90%; max-width: 450px; border: 1px solid var(--neon); border-radius: 15px; padding: 20px; text-align: center; background: rgba(0,20,0,0.8); box-shadow: 0 0 20px var(--neon); }
+        .task-btn { background: #111; border: 1px solid var(--neon); color: #0f0; padding: 12px; margin: 10px 0; border-radius: 8px; cursor: pointer; display: block; text-decoration: none; font-size: 14px; }
+        .task-btn:hover { background: var(--neon); color: #000; }
+        #executor { display: none; width: 95%; max-width: 700px; height: 450px; text-align: left; }
+        textarea { width: 100%; height: 200px; background: #000; color: #fff; border: 1px solid #333; margin-top: 10px; padding: 10px; border-radius: 5px; }
+        .btn-main { width: 100%; padding: 15px; background: var(--neon); color: #000; border: none; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-<div class="executor-window">
-    <div class="top-bar">
-        <span>MALAK SYSTEM V2 (DELTA MODE)</span>
-        <span>STATUS: <span style="color: yellow;">READY</span></span>
-    </div>
+<div id="key-screen" class="box">
+    <h2 style="margin-top:0;">MALAK HACKS - نظام المفتاح</h2>
+    <p style="font-size: 12px; color: #888;">أكمل الشروط لفتح الهاك:</p>
     
-    <div class="main-content">
-        <div class="side-tabs" id="tabsContainer">
-            <div class="tab-item active" onclick="selectTab(0)">Script 1</div>
-        </div>
-        
-        <div class="editor-area">
-            <input type="text" id="scriptName" placeholder="اسم السكربت (مثلاً: Fly)...">
-            <textarea id="editor" placeholder="-- ضع سكربت روبلوكس هنا..."></textarea>
-        </div>
+    <a href="https://youtube.com/@malaku_994?si=8mOxRBCY67r9zsfq" target="_blank" class="task-btn">1. اشتراك بالقناة (إجباري)</a>
+    <a href="https://youtube.com/@malaku_994?si=8mOxRBCY67r9zsfq" target="_blank" class="task-btn">2. لايك لآخر فيديو</a>
+    <a href="https://youtube.com/@malaku_994?si=8mOxRBCY67r9zsfq" target="_blank" class="task-btn">3. تعليق على الفيديو</a>
+
+    <input type="text" id="key-input" placeholder="ضع المفتاح هنا..." style="width:100%; padding:10px; background:#000; border:1px solid var(--neon); color:#fff; border-radius:5px; margin-top:10px; text-align:center;">
+    <button class="btn-main" onclick="checkKey()">فتح الهاك (CHECK)</button>
+    <p style="font-size: 10px; color: #555; margin-top: 10px;">المفتاح الحالي للتجربة: MALAK-994</p>
+</div>
+
+<div id="executor" class="box">
+    <div style="border-bottom: 1px solid #0f0; padding-bottom: 10px; margin-bottom: 10px; display: flex; justify-content: space-between;">
+        <span>MALAK HACKS V1.0</span>
+        <span style="color: yellow;">CONNECTED</span>
     </div>
-    
-    <div class="bottom-btns">
-        <button onclick="execute()">EXECUTE</button>
-        <button class="secondary" onclick="addNewTab()">ADD TAB (+)</button>
-        <button class="secondary" onclick="clearEditor()">CLEAR</button>
-    </div>
+    <input type="text" placeholder="Script Name..." style="background:#000; border:1px solid #333; color:#0f0; padding:5px; border-radius:3px; width:150px;">
+    <textarea placeholder="-- Paste Lua Script Here..."></textarea>
+    <button class="btn-main" onclick="alert('Script Executed!')">EXECUTE (تشغيل)</button>
+    <button onclick="location.reload()" style="background:none; border:none; color:red; cursor:pointer; margin-top:10px; width:100%; font-size:11px;">خروج (Logout)</button>
 </div>
 
 <script>
-    let scripts = [{ name: "Script 1", content: "" }];
-    let currentTab = 0;
-
-    function selectTab(index) {
-        scripts[currentTab].content = document.getElementById('editor').value;
-        currentTab = index;
-        document.getElementById('editor').value = scripts[index].content;
-        document.getElementById('scriptName').value = scripts[index].name;
-        renderTabs();
-    }
-
-    function addNewTab() {
-        scripts.push({ name: "New Script", content: "" });
-        selectTab(scripts.length - 1);
-    }
-
-    function renderTabs() {
-        const container = document.getElementById('tabsContainer');
-        container.innerHTML = "";
-        scripts.forEach((s, i) => {
-            const div = document.createElement('div');
-            div.className = `tab-item ${i === currentTab ? 'active' : ''}`;
-            div.innerText = s.name;
-            div.onclick = () => selectTab(i);
-            container.appendChild(div);
-        });
-    }
-
-    function execute() {
-        const code = document.getElementById('editor').value;
-        const name = document.getElementById('scriptName').value;
-        scripts[currentTab].name = name || "Unnamed";
-        renderTabs();
-        
-        if(!code) return alert("سيدي/تي، ضع الكود أولاً!");
-        
-        alert("تم إرسال سكربت [" + scripts[currentTab].name + "] للتنفيذ بنجاح!");
-        // هنا يتم ربط الكود بـ API الهاك إذا كان لديك حاقن
-    }
-
-    function clearEditor() {
-        document.getElementById('editor').value = "";
+    function checkKey() {
+        const input = document.getElementById('key-input').value;
+        if(input === "MALAK-994") {
+            document.getElementById('key-screen').style.display = 'none';
+            document.getElementById('executor').style.display = 'block';
+        } else {
+            alert("المفتاح خاطئ! اشترك في القناة وجرب مرة ثانية.");
+        }
     }
 </script>
 
